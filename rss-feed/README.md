@@ -50,7 +50,7 @@ Responsive Reader
 | Styling | TailwindCSS & Custom CSS |
 
 
-## AI Collaboration Reflection
+## AI Collaboration
 
 This project was built with the support of AI tools to accelerate development, improve code quality, and unblock complex issues during implementation. AI was used as a collaborative engineering assistant, not a replacement for understanding. Every output was reviewed, tested, and adapted to fit the architecture of the application.
 
