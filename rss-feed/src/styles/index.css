@@ -966,6 +966,7 @@ img {
 @media (min-width: 300px) and (max-width: 600px) {
   .main-panel {
     padding-top: 0;
+    margin-left: -20px;
   }
   .toolbar {
     margin-top: -40px;
