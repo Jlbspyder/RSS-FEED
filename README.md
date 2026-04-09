@@ -2,7 +2,7 @@
 
 Frontpage is a customizable content aggregator that pulls RSS and Atom feeds into one well-designed reading dashboard. It is a full-stack RSS feed reader designed to provide a clean, distraction-free way to consume content from multiple sources in one place. The application allows users to follow feeds, organize them, and efficiently catch up on new content through a structured reading experience.
 
-**Live URL:** [your-deployed-url.com]
+**Live URL:** [https://jlb-rssfeed.netlify.app]
 
 
 ## Overview

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { Loader } from "lucide-react";
 import { Sidebar } from "./features/feeds/Sidebar";
 import { Topbar } from "./components/Topbar";
 import { ArticleList } from "./features/articles/ArticleList";
@@ -43,8 +42,7 @@ function getViewMeta(view, model) {
 
   return {
     title: "All articles",
-    subtitle:
-      "Your guest dashboard, powered by live RSS feed data.",
+    subtitle: "Your guest dashboard, powered by live RSS feed data.",
   };
 }
 
@@ -90,10 +88,28 @@ export default function Dashboard({ onExitGuest, goToHome }) {
         setLoadError("");
 
         const response = await fetchGuestFeeds();
+
+      //    if (!response) {
+      //   throw new Error("Guest API returned no data.");
+      // }
+
         const nextModel = buildGuestModelFromApi(response);
 
+      //    if (!nextModel || !Array.isArray(nextModel.articles)) {
+      //   throw new Error("Guest data could not be transformed correctly.");
+      // }
+
         setModel(nextModel);
+      //   setModel({
+      //   categories: Array.isArray(nextModel.categories) ? nextModel.categories : [],
+      //   feeds: Array.isArray(nextModel.feeds) ? nextModel.feeds : [],
+      //   articles: Array.isArray(nextModel.articles) ? nextModel.articles : [],
+      //   errors: Array.isArray(nextModel.errors) ? nextModel.errors : [],
+      //   stats: nextModel.stats ?? null,
+      //   fetchedAt: nextModel.fetchedAt ?? null,
+      // });
       } catch (error) {
+        console.error("GUEST DASHBOARD LOAD ERROR:", error);
         setLoadError(error.message || "Failed to load guest dashboard.");
       } finally {
         setIsLoading(false);
@@ -143,6 +159,16 @@ export default function Dashboard({ onExitGuest, goToHome }) {
           article.categoryName.toLowerCase().includes(needle),
       );
     }
+
+//     if (query.trim()) {
+//   const needle = query.toLowerCase();
+//   items = items.filter((article) =>
+//     (article.title || "").toLowerCase().includes(needle) ||
+//     (article.excerpt || "").toLowerCase().includes(needle) ||
+//     (article.feedTitle || "").toLowerCase().includes(needle) ||
+//     (article.categoryName || "").toLowerCase().includes(needle)
+//   );
+// }
 
     return items;
   }, [model, view, query, readIds, bookmarkIds]);
@@ -206,7 +232,7 @@ export default function Dashboard({ onExitGuest, goToHome }) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center" style={{ padding: "2rem" }}>
           <h1 className="text-blue-600">Loading Frontpage...</h1>
-          <Loader style={{ color: "blue", width: "2rem", height: "2rem" }} />
+          <div className="spinner" />
         </div>
       </div>
     );
@@ -218,13 +244,13 @@ export default function Dashboard({ onExitGuest, goToHome }) {
         <main className="flex flex-col" style={{ padding: "2rem" }}>
           <h1>Error loading dashboard</h1>
           <p className="text-center mb-2">{loadError}</p>
-          <button className="button button-primary" onClick={() => window.location.reload()}>
+          <button
+            className="button button-primary"
+            onClick={() => window.location.reload()}
+          >
             Try again
           </button>
-          <button
-            className="button mt-2"
-            onClick={onExitGuest}
-          >
+          <button className="button mt-2" onClick={onExitGuest}>
             Back to landing
           </button>
         </main>
@@ -262,7 +288,9 @@ export default function Dashboard({ onExitGuest, goToHome }) {
             className="toolbar"
             style={{ marginBottom: "1rem", flexWrap: "wrap", gap: "0.75rem" }}
           >
-            <span className={`active px-1 rounded-sm ${getCategoryTitleClass(meta.title)}`}>
+            <span
+              className={`active px-1 rounded-sm ${getCategoryTitleClass(meta.title)}`}
+            >
               {filteredArticles.length} articles
             </span>
           </div>

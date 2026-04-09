@@ -10,7 +10,7 @@ export function ArticleList({
   onToggleRead,
 }) {
   return (
-    <>
+    <div className={layout === 'cards' ? 'layout-grid' : 'layout-list'}>
       {articles.map((article) => (
         <ArticleCard
           key={article.id}
@@ -23,6 +23,6 @@ export function ArticleList({
           onToggleRead={onToggleRead}
         />
       ))}
-    </>
+    </div>
   )
 }

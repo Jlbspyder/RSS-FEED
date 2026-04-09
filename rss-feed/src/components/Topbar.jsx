@@ -1,5 +1,6 @@
 import { Compass, Newspaper, Rss, RefreshCw } from "lucide-react";
 import { SearchBar } from "../features/search/SearchBar";
+import { LayoutToggle } from "../features/layout/LayoutToggle"
 import { useAuth } from "../context/AuthContext";
 
 function isTabActive(activeView, tab) {
@@ -36,6 +37,10 @@ export function Topbar({
   const { user, logout } = useAuth();
 
   return (
+  <>
+  <div className="fixed flex justify-center top-2 right-2 z-50 bg-white/80 backdrop-blur-sm">
+    <LayoutToggle layout={layout} onChange={onLayoutChange} />
+  </div>
     <header className="app-header">
       <div className="app-header-top">
         <div className="w-[80%] flex justify-start items-center gap-3">
@@ -100,13 +105,16 @@ export function Topbar({
             Hi {user?.firstName || "User"}
           </span>
 
-          <div className="text-blue-500 cursor-pointer hover:text-blue-600" onClick={logout}>
-            Logout
-          </div>
+          {user && (
+            <div className="text-blue-500 cursor-pointer hover:text-blue-600" onClick={logout}>
+              Logout
+            </div>
+          )}
         </div>
           </div>
         </div>
       </div>
     </header>
+  </>
   );
 }

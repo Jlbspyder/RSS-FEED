@@ -1,10 +1,10 @@
 export function LayoutToggle({ layout, onChange }) {
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex text-[12px] gap-2 w-full">
       {['cards', 'list'].map((option) => (
         <button
           key={option}
-          className={`button w-15 ${layout === option ? 'primary' : 'ghost'}`}
+          className={`border px-1 rounded-sm hover:text-blue-400 ${layout === option ? 'primary' : 'ghost'}`}
           onClick={() => onChange(option)}
           type="button"
         >
