@@ -89,25 +89,25 @@ export default function Dashboard({ onExitGuest, goToHome }) {
 
         const response = await fetchGuestFeeds();
 
-      //    if (!response) {
-      //   throw new Error("Guest API returned no data.");
-      // }
+         if (!response) {
+        throw new Error("Guest API returned no data.");
+      }
 
         const nextModel = buildGuestModelFromApi(response);
 
-      //    if (!nextModel || !Array.isArray(nextModel.articles)) {
-      //   throw new Error("Guest data could not be transformed correctly.");
-      // }
+         if (!nextModel || !Array.isArray(nextModel.articles)) {
+        throw new Error("Guest data could not be transformed correctly.");
+      }
 
-        setModel(nextModel);
-      //   setModel({
-      //   categories: Array.isArray(nextModel.categories) ? nextModel.categories : [],
-      //   feeds: Array.isArray(nextModel.feeds) ? nextModel.feeds : [],
-      //   articles: Array.isArray(nextModel.articles) ? nextModel.articles : [],
-      //   errors: Array.isArray(nextModel.errors) ? nextModel.errors : [],
-      //   stats: nextModel.stats ?? null,
-      //   fetchedAt: nextModel.fetchedAt ?? null,
-      // });
+        // setModel(nextModel);
+        setModel({
+        categories: Array.isArray(nextModel.categories) ? nextModel.categories : [],
+        feeds: Array.isArray(nextModel.feeds) ? nextModel.feeds : [],
+        articles: Array.isArray(nextModel.articles) ? nextModel.articles : [],
+        errors: Array.isArray(nextModel.errors) ? nextModel.errors : [],
+        stats: nextModel.stats ?? null,
+        fetchedAt: nextModel.fetchedAt ?? null,
+      });
       } catch (error) {
         console.error("GUEST DASHBOARD LOAD ERROR:", error);
         setLoadError(error.message || "Failed to load guest dashboard.");
@@ -149,26 +149,26 @@ export default function Dashboard({ onExitGuest, goToHome }) {
       items = items.filter((article) => article.feedId === feed?.id);
     }
 
-    if (query.trim()) {
-      const needle = query.toLowerCase();
-      items = items.filter(
-        (article) =>
-          article.title.toLowerCase().includes(needle) ||
-          article.excerpt.toLowerCase().includes(needle) ||
-          article.feedTitle.toLowerCase().includes(needle) ||
-          article.categoryName.toLowerCase().includes(needle),
-      );
-    }
+    // if (query.trim()) {
+    //   const needle = query.toLowerCase();
+    //   items = items.filter(
+    //     (article) =>
+    //       article.title.toLowerCase().includes(needle) ||
+    //       article.excerpt.toLowerCase().includes(needle) ||
+    //       article.feedTitle.toLowerCase().includes(needle) ||
+    //       article.categoryName.toLowerCase().includes(needle),
+    //   );
+    // }
 
-//     if (query.trim()) {
-//   const needle = query.toLowerCase();
-//   items = items.filter((article) =>
-//     (article.title || "").toLowerCase().includes(needle) ||
-//     (article.excerpt || "").toLowerCase().includes(needle) ||
-//     (article.feedTitle || "").toLowerCase().includes(needle) ||
-//     (article.categoryName || "").toLowerCase().includes(needle)
-//   );
-// }
+    if (query.trim()) {
+  const needle = query.toLowerCase();
+  items = items.filter((article) =>
+    (article.title || "").toLowerCase().includes(needle) ||
+    (article.excerpt || "").toLowerCase().includes(needle) ||
+    (article.feedTitle || "").toLowerCase().includes(needle) ||
+    (article.categoryName || "").toLowerCase().includes(needle)
+  );
+}
 
     return items;
   }, [model, view, query, readIds, bookmarkIds]);
