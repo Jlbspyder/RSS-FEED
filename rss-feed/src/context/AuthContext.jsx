@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+
 const TOKEN_KEY = "frontpage-token";
 
 const AuthContext = createContext(null);
@@ -18,7 +20,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
-        const response = await fetch("/api/auth/me", {
+        const response = await fetch(`${API_BASE}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +45,7 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   async function register(firstName, lastName, email, password) {
-    const response = await fetch("/api/auth/register", {
+    const response = await fetch(`${API_BASE}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +67,7 @@ export function AuthProvider({ children }) {
   }
 
   async function login(email, password) {
-    const response = await fetch("/api/auth/login", {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
