@@ -264,7 +264,7 @@ export default function Dashboard({ onExitGuest, goToHome }) {
           bookmarkCount={bookmarkIds.length}
         />
 
-        <main className="main-panel mt-45 md:mt-25 lg:mt-23">
+        <main className="main-panel mt-50 md:mt-45 lg:mt-23">
           <div
             className="toolbar"
             style={{ marginBottom: "1rem", flexWrap: "wrap", gap: "0.75rem" }}

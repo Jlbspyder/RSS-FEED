@@ -49,7 +49,7 @@ export function ArticleCard({
 }) {
   return (
     <article
-      className={`article-row ${layout === "cards" ? "article-row-card" : ""} ${isRead ? "read" : "unread"}`}
+      className={`article-row border ${layout === "cards" ? "article-row-card" : ""} ${isRead ? "read" : "unread"}`}
     >
       <div
         className="article-row-main"

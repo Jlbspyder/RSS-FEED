@@ -43,7 +43,7 @@ export function Topbar({
   </div>
     <header className="app-header">
       <div className="app-header-top">
-        <div className="w-[80%] flex justify-start items-center gap-3">
+        <div className="sm:w-[80%] flex justify-start items-center gap-3">
           <div onClick={goToHome} className="app-brand">
             <div className="app-brand-mark">F</div>
             <div className="app-brand-text">
@@ -86,7 +86,7 @@ export function Topbar({
           <div className="flex w-full gap-2">
             <button
               type="button"
-              className="flex items-center justify-center gap-1 button button-secondary w-[30%]"
+              className="flex items-center justify-center gap-1 button button-secondary w-[40%] sm:w-[20%]"
               onClick={onRefresh}
             >
               <RefreshCw size={16} />
@@ -95,7 +95,7 @@ export function Topbar({
 
             <button
               type="button"
-              className="button flex justify-center w-[35%]"
+              className="button flex justify-center w-[50%] sm:w-[20%] lg:w-[30%]"
               onClick={markAllRead}
             >
               Mark all read
